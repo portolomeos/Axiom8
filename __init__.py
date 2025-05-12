@@ -32,50 +32,62 @@ except ImportError:
 
 # Import the enhanced torus simulation visualizer
 try:
-    from axiom8.visualizer.torus_simulation_visualizer import EnhancedTorusVisualizer, create_enhanced_visualizer
+    from axiom8.visualizer.enhanced_torus_visualizer import EnhancedCollapseVisualizer as EnhancedTorusVisualizer
+    from axiom8.visualizer.enhanced_torus_visualizer import create_enhanced_visualizer
 except ImportError:
     try:
-        from axiom7.visualizer.torus_simulation_visualizer import EnhancedTorusVisualizer, create_enhanced_visualizer
+        from axiom7.visualizer.enhanced_torus_visualizer import EnhancedCollapseVisualizer as EnhancedTorusVisualizer
+        from axiom7.visualizer.enhanced_torus_visualizer import create_enhanced_visualizer
     except ImportError:
-        # Define a minimal fallback if the import fails
-        class EnhancedTorusVisualizer:
-            """Fallback enhanced torus simulation visualizer"""
-            def __init__(self, *args, **kwargs): pass
-            def update_state(self, manifold): pass
-            def render_torus_3d(self, **kwargs): 
-                fig, ax = plt.subplots()
-                ax.text(0.5, 0.5, "EnhancedTorusVisualizer not available", 
-                      ha='center', va='center')
-                return fig, ax
-            def create_unwrapped_visualization(self, **kwargs):
-                fig, ax = plt.subplots()
-                ax.text(0.5, 0.5, "EnhancedTorusVisualizer not available", 
-                      ha='center', va='center')
-                return fig, ax
-            def create_combined_visualization(self, **kwargs):
-                fig = plt.figure()
-                ax = fig.add_subplot(111)
-                ax.text(0.5, 0.5, "EnhancedTorusVisualizer not available",
-                      ha='center', va='center')
-                return fig
-            def create_ancestry_visualization(self):
-                fig, ax = plt.subplots()
-                ax.text(0.5, 0.5, "EnhancedTorusVisualizer not available",
-                      ha='center', va='center')
-                return fig
-            def create_vortex_dynamics_visualization(self):
-                fig, ax = plt.subplots()
-                ax.text(0.5, 0.5, "EnhancedTorusVisualizer not available",
-                      ha='center', va='center')
-                return fig
-            def create_field_composition_visualization(self):
-                fig, ax = plt.subplots()
-                ax.text(0.5, 0.5, "EnhancedTorusVisualizer not available",
-                      ha='center', va='center')
-                return fig
-            
-        def create_enhanced_visualizer(*args, **kwargs):
-            return EnhancedTorusVisualizer()
+        try:
+            # Try direct import from local directory
+            from .enhanced_torus_visualizer import EnhancedCollapseVisualizer as EnhancedTorusVisualizer
+            from .enhanced_torus_visualizer import create_enhanced_visualizer
+        except ImportError:
+            # Define a minimal fallback if the import fails
+            class EnhancedTorusVisualizer:
+                """Fallback enhanced torus simulation visualizer"""
+                def __init__(self, *args, **kwargs): pass
+                def update_state(self, manifold): pass
+                def render_torus_3d(self, **kwargs): 
+                    fig, ax = plt.subplots()
+                    ax.text(0.5, 0.5, "EnhancedTorusVisualizer not available", 
+                          ha='center', va='center')
+                    return fig, ax
+                def create_unwrapped_visualization(self, **kwargs):
+                    fig, ax = plt.subplots()
+                    ax.text(0.5, 0.5, "EnhancedTorusVisualizer not available", 
+                          ha='center', va='center')
+                    return fig, ax
+                def create_combined_visualization(self, **kwargs):
+                    fig = plt.figure()
+                    ax = fig.add_subplot(111)
+                    ax.text(0.5, 0.5, "EnhancedTorusVisualizer not available",
+                          ha='center', va='center')
+                    return fig
+                def create_ancestry_visualization(self):
+                    fig, ax = plt.subplots()
+                    ax.text(0.5, 0.5, "EnhancedTorusVisualizer not available",
+                          ha='center', va='center')
+                    return fig
+                def create_vortex_dynamics_visualization(self):
+                    fig, ax = plt.subplots()
+                    ax.text(0.5, 0.5, "EnhancedTorusVisualizer not available",
+                          ha='center', va='center')
+                    return fig
+                def create_field_composition_visualization(self):
+                    fig, ax = plt.subplots()
+                    ax.text(0.5, 0.5, "EnhancedTorusVisualizer not available",
+                          ha='center', va='center')
+                    return fig
+                def create_structure_enhanced_visualization(self, **kwargs):
+                    fig, ax = plt.subplots()
+                    ax.text(0.5, 0.5, "EnhancedTorusVisualizer not available",
+                          ha='center', va='center')
+                    return fig, ax
+                
+            def create_enhanced_visualizer(*args, **kwargs):
+                return EnhancedTorusVisualizer()
 
 # Export all visualization functions and classes
 __all__ = [
